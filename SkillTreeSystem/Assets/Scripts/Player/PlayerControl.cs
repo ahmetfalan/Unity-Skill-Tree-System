@@ -60,20 +60,10 @@ public class PlayerControl : MonoBehaviour
 
     public void UpdateStats()
     {
-        Debug.Log("aa");
-        if (SkillTreeReader.Instance.IsSkillUnlocked(0))
-        {
-            Debug.Log("skill tree unlocked");
-        }
+        if (SkillTreeReader.Instance.IsSkillUnlocked(0)) {}
         if (SkillTreeReader.Instance.IsSkillUnlocked(1))
-        {
             playerAttributes.Speed = boostSpeed + 5;
-            Debug.Log("skill speed unlocked");
-        }
         if (SkillTreeReader.Instance.IsSkillUnlocked(2))
-        {
             playerAttributes.Jump = boostJump + 4;
-            Debug.Log("skill jump unlocked");
-        }
     }
 }

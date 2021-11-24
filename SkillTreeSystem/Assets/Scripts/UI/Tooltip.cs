@@ -54,7 +54,6 @@ public class Tooltip : MonoBehaviour
             LayoutShowHide();
         }
 
-
         Vector2 position = Input.mousePosition;
 
         float pivotX = position.x / Screen.width;

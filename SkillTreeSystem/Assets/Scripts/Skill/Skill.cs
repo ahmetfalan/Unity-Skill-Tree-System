@@ -13,7 +13,9 @@ public class Skill
 public enum SkillType
 {
     BoostAttributes,
+    DebuffEnimies,
     UnlockMap,
     UnlockMission,
-    UnlockItem
+    UnlockItem,
+    Other
 }
