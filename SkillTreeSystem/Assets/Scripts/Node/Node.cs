@@ -27,6 +27,9 @@ public class Node
     public Rect rectDescriptionLabel;
     public Rect rectDescription;
 
+    public Rect rectSkillTypeLabel;
+    public Rect rectSkillType;
+
     public ConnectionPoint inPoint;
     public ConnectionPoint outPoint;
 
@@ -54,7 +57,7 @@ public class Node
     public Node(Vector2 position, float width, float height, GUIStyle nodeStyle,
         GUIStyle selectedStyle, GUIStyle inPointStyle, GUIStyle outPointStyle,
         Action<ConnectionPoint> OnClickInPoint, Action<ConnectionPoint> OnClickOutPoint,
-        Action<Node> OnClickRemoveNode, int id, bool unlocked, int cost, int[] dependencies, string tittle, string description)
+        Action<Node> OnClickRemoveNode, int id, bool unlocked, int cost, int[] dependencies, string tittle, string description, SkillType skillType)
     {
         rect = new Rect(position.x, position.y, width, height);
         style = nodeStyle;
@@ -71,39 +74,44 @@ public class Node
         OnRemoveNode = OnClickRemoveNode;
 
         // Create new Rect and GUIStyle for our title and custom fields
-        float rowHeight = height / 17;
+        float rowHeight = height / 20;
 
         rectID = new Rect(position.x, position.y + rowHeight, width, rowHeight);
         styleID = new GUIStyle();
         styleID.alignment = TextAnchor.UpperCenter;
 
-        rectUnlocked = new Rect(position.x + width / 2,
-            position.y + 3 * rowHeight, width / 2, rowHeight);
+        rectUnlocked = new Rect(position.x + width / 3,
+            position.y + 3 * rowHeight, width / 3, rowHeight);
 
         rectUnlockLabel = new Rect(position.x,
-            position.y + 3 * rowHeight, width / 2, rowHeight);
+            position.y + 3 * rowHeight, width / 3, rowHeight);
 
         styleField = new GUIStyle();
         styleField.alignment = TextAnchor.UpperRight;
 
         rectCostLabel = new Rect(position.x,
-            position.y + 5 * rowHeight, width / 2, rowHeight);
+            position.y + 5 * rowHeight, width / 3, rowHeight);
 
-        rectCost = new Rect(position.x + width / 2,
+        rectCost = new Rect(position.x + width / 3,
             position.y + 5 * rowHeight, 20, rowHeight);
 
-
         rectTittleLabel = new Rect(position.x,
-            position.y + 7 * rowHeight, width / 2, rowHeight);
+            position.y + 7 * rowHeight, width / 3, rowHeight);
 
-        rectTittle = new Rect(position.x + width / 2,
-            position.y + 7 * rowHeight, 100, rowHeight);
+        rectTittle = new Rect(position.x + width / 3,
+            position.y + 7 * rowHeight, 120, rowHeight);
 
         rectDescriptionLabel = new Rect(position.x,
-            position.y + 9 * rowHeight, width / 2, rowHeight);
+            position.y + 9 * rowHeight, width / 3, rowHeight);
 
-        rectDescription = new Rect(position.x + width / 2,
-            position.y + 9 * rowHeight, 110, rowHeight + 100);
+        rectDescription = new Rect(position.x + width / 3,
+            position.y + 9 * rowHeight, 140, rowHeight + 100);
+
+        rectSkillTypeLabel = new Rect(position.x,
+            position.y + 16 * rowHeight, width / 3, rowHeight);
+
+        rectSkillType = new Rect(position.x + width / 3,
+            position.y + 16 * rowHeight, 120, rowHeight + 10);
 
         this.unlocked = unlocked;
 
@@ -115,12 +123,12 @@ public class Node
         skill.skillDependencies = dependencies;
         skill.skillTittle = tittle;
         skill.skillDescription = description;
+        skill.skillType = skillType;
 
         // Create string with ID info
         nodeTitle = new StringBuilder();
         nodeTitle.Append("ID: ");
         nodeTitle.Append(id);
-
     }
 
     public void Drag(Vector2 delta)
@@ -135,6 +143,8 @@ public class Node
         rectTittleLabel.position += delta;
         rectDescription.position += delta;
         rectDescriptionLabel.position += delta;
+        rectSkillType.position += delta;
+        rectSkillTypeLabel.position += delta;
     }
 
     public void MoveTo(Vector2 pos)
@@ -149,6 +159,8 @@ public class Node
         rectTittleLabel.position += pos;
         rectDescription.position += pos;
         rectDescriptionLabel.position += pos;
+        rectSkillType.position += pos;
+        rectSkillTypeLabel.position += pos;
     }
 
     public void Draw()
@@ -173,12 +185,17 @@ public class Node
         GUI.Label(rectCostLabel, "Cost: ", styleField);
         skill.cost = int.Parse(GUI.TextField(rectCost, skill.cost.ToString()));
 
-
+        // Print the tittle field
         GUI.Label(rectTittleLabel, "Tiitle: ", styleField);
         skill.skillTittle = GUI.TextArea(rectTittle, skill.skillTittle.ToString());
 
+        // Print the desciption field
         GUI.Label(rectDescriptionLabel, "Description: ", styleField);
         skill.skillDescription = GUI.TextArea(rectDescription, skill.skillDescription.ToString());
+
+        // Print the type field
+        GUI.Label(rectSkillTypeLabel, "Type: ", styleField);
+        skill.skillType = (SkillType)EditorGUI.EnumPopup(rectSkillType, skill.skillType);
     }
 
     public bool ProcessEvents(Event e)

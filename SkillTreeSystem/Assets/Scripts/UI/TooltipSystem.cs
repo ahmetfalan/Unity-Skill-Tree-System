@@ -7,9 +7,13 @@ public class TooltipSystem : MonoBehaviour
     public static TooltipSystem Instance;
 
     public Tooltip tooltip;
-    void Start()
+    void Awake()
     {
         Instance = this;
+    }
+    void Start()
+    {
+        Hide();
     }
 
     public static void Show(int cost, string tittle = "", string description= "")

@@ -25,8 +25,8 @@ public class PlayerControl : MonoBehaviour
     {
         Instance = this;
         rb = this.gameObject.GetComponent<Rigidbody2D>();
-        PlayerAttributes._points = PlayerPrefs.GetInt("Point");
-        //PlayerPrefs.DeleteAll();
+        //PlayerAttributes._points = PlayerPrefs.GetInt("Point");
+        PlayerPrefs.DeleteAll();
 
 
         boostSpeed = playerAttributes.Speed;

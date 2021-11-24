@@ -7,12 +7,13 @@ public class Skill
     public int cost;
     public string skillTittle;
     public string skillDescription;
-    //public SkillType skillType;
+    public SkillType skillType;
 }
-/*
+
 public enum SkillType
 {
     BoostAttributes,
     UnlockMap,
-    UnlockMission
-}*/
+    UnlockMission,
+    UnlockItem
+}

@@ -76,7 +76,7 @@ public class NodeBasedEditor : EditorWindow
 
     private void OnGUI()
     {
-        DrawGrid(20, 0.2f, Color.gray);
+        DrawGrid(15, 0.2f, Color.gray);
 
         DrawButtons();
 
@@ -306,9 +306,9 @@ public class NodeBasedEditor : EditorWindow
         }
 
         // We create the node with the default info for the node
-        nodes.Add(new Node(mousePosition, 300, 350, nodeStyle, selectedNodeStyle,
+        nodes.Add(new Node(mousePosition, 300, 400, nodeStyle, selectedNodeStyle,
             inPointStyle, outPointStyle, OnClickInPoint, OnClickOutPoint, OnClickRemoveNode,
-            nodeCount, false, 0, null, "", ""));
+            nodeCount, false, 0, null, "", "", SkillType.BoostAttributes));
         ++nodeCount;
     }
 
@@ -585,9 +585,9 @@ public class NodeBasedEditor : EditorWindow
             nodes = new List<Node>();
         }
 
-        nodes.Add(new Node(position, 300, 350, nodeStyle, selectedNodeStyle,
+        nodes.Add(new Node(position, 300, 400, nodeStyle, selectedNodeStyle,
             inPointStyle, outPointStyle, OnClickInPoint, OnClickOutPoint, OnClickRemoveNode,
-            skill.skillID, skill.unlocked, skill.cost, skill.skillDependencies, skill.skillTittle, skill.skillDescription));
+            skill.skillID, skill.unlocked, skill.cost, skill.skillDependencies, skill.skillTittle, skill.skillDescription, skill.skillType));
         ++nodeCount;
     }
 }
