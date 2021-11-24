@@ -1,5 +1,5 @@
 # Unity Skill Tree System
 
-I made an basic skill tree system using node editor inspiration on Antonio Clavain [tutorial.](https://antonioclavain.com/?p=28)
+I made a basic skill tree system using node editor inspiration on Antonio Clavain [tutorial.](https://antonioclavain.com/?p=28)
 
-This repo not yet completed!!
+>This repo not yet completed!!
